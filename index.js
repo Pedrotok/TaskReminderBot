@@ -1,6 +1,6 @@
 // libs
 const request     = require('request'),
-      telegramBot = require('node-telegram-bot-api'),
+      telegramBot = require('node-telegram-bot-api');
 
 require('dotenv').config();
 

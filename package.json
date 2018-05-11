@@ -1,0 +1,13 @@
+{
+  "name": "TaskReminderBot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "^0.30.0",
+    "request": "^2.85.0"
+  }
+}

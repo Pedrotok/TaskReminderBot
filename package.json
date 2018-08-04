@@ -4,11 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "dependencies": {
     "dotenv": "^5.0.1",
     "node-telegram-bot-api": "^0.30.0",
+    "nodemon": "^1.18.3",
     "request": "^2.85.0"
   }
 }

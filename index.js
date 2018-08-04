@@ -34,7 +34,7 @@ bot.onText(/bb/, (msg) => {
 
 // commands
 bot.onText(/^\/start(@\w+)*$/, (msg) => {
-  var url = `https://trello.com/1/authorize?expiration=never&callback_method=postMessage&name=HappyTaskReminderBot&scope=read&key=${process.env.TRELLOKEY}`
+  var url = `https://trello.com/1/authorize?expiration=1day&name=HappyTaskReminderBot&scope=read&response_type=token&key=${process.env.TRELLOKEY}`
   bot.sendMessage(msg.chat.id, "Welcome " + url);
     
 });

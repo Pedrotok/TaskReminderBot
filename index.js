@@ -1,6 +1,7 @@
 // libs
 const request     = require('request'),
-      telegramBot = require('node-telegram-bot-api');
+      telegramBot = require('node-telegram-bot-api'),
+      https       = require('https');
 
 require('dotenv').config();
 
@@ -36,7 +37,34 @@ bot.onText(/bb/, (msg) => {
 bot.onText(/^\/start(@\w+)*$/, (msg) => {
   var url = `https://trello.com/1/authorize?expiration=1day&name=HappyTaskReminderBot&scope=read&response_type=token&key=${process.env.TRELLOKEY}`
   bot.sendMessage(msg.chat.id, "Welcome " + url);
-    
+});
+
+bot.onText(/^\/sendToken(@\w+)*$/, (msg) => {
+  var _trello;
+  bot.sendMessage(msg.chat.id, "Ok, send me the token trello gave you.");
+  bot.on('message', (msg) => {
+    //TODO: persistence
+    _trello = {
+      token : msg.text,
+      id    : msg.chat.id
+    }
+    //TODO: request boards from trello api
+    const url = `https://api.trello.com/1/members/me/boards?key=${process.env.TRELLOKEY}&token=${_trello.token}`;
+    https.get(url, (res) => {
+      let data = '';
+
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+
+      res.on('end', () => {
+        var boardsObj= JSON.parse(data);
+        console.log(boardsObj);
+      });
+    }).on('error', (err) => {
+      console.error(err);
+    })
+  })
 });
 
 bot.onText(/^\/healthcheck(@\w+)*$/, (msg) => {
